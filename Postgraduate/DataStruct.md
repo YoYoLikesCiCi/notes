@@ -27,8 +27,7 @@ $$
 
 * * *
 ## 数据结构三要素
-  
-### 1. 逻辑结构
+### 1. 逻辑结构  
 $$逻辑结构 \left\{ \begin{matrix} 线性 \\ 非线性 \left\{\begin{matrix} 集合 \\ 树 -- 一对多 \\ 图 -- 多对多\end{matrix} 
 \right.  \end{matrix} 
 \right.$$ 
@@ -41,6 +40,7 @@ $$存储结构（物理结构）- \left\{\begin{matrix} 顺序 -- 逻辑上相�
 运算：运算的定义（逻辑）和实现（物理）
 
 * * *
+### 数据类型
 #### *数据类型*：是一个值的集合和定义在此集合上的一组操作的总称
   - 原子类型 - 其值不可再分的数据类型 int, bool
   - 结构类型 - 其值可以再分解为若干成分（分量）的数据类型 struct , 
@@ -117,18 +117,20 @@ $$
 $$
 S(n) = O(g_{(n)})
 $$
+算法的<mark>原地工作</mark> 是指算法所需的辅助空间为<mark>常量</mark> ,即O(1)    
 
+***
 ![image-20200831191346442](http://picbed.yoyolikescici.cn/uPic/image-20200831191346442.png)
 ![](http://picbed.yoyolikescici.cn/uPic/20201221150940.png)
-# 第二章 线性表
 
-**定义**： 具有 相同数据类型 的n（n>=0) 个数据元素的有限序列。
+
+
+# 第二章 线性表 Linear List
+
+**定义**： 具有 <mark>相同数据类型</mark> 的n（n>=0) 个数据元素的<mark>有限序列</mark>。
 
 n 表长
-
-$$
-L = (a_{1},a_{2},a_{3},\dots,a_{i}, a_{i+1},\dots, a_{n})
-$$
+$$ L = (a_1,a_2,a_3,\dots,a_i \quad a_{i+1}, \dots,a_n)$$ 
 
 位序从1开始
 
@@ -148,12 +150,11 @@ GetElem (L,i) 按值
 创、销、增、删、改、查
 
 ## 二、 顺序表的定义
+顺序表: 用 <mark>顺序存储</mark> 的方式实现线性表顺序存储.  
 
-线性表的顺序存储 \-\- \- *把逻辑上相邻的两个元素在物理位置上也相邻*
+线性表的顺序存储 \-\- \- *把逻辑上相邻的两个元素在物理位置上也相邻*的存储单元中.
 
-静态分配 *一开始长度确定*
-
-### 1\. 初始化
+### 1. 静态分配初始化 <u>---  一开始长度确定</u>
 
 ```C++
 #define Maxsize 10 
@@ -179,6 +180,36 @@ int main(){
 }
 ```
 
+### 动态分配初始化 
+
+```C++
+#define InitSize 10
+typedef struct{
+    ElemType *data;
+    int MaxSize;
+    int length;
+}SeqList;
+
+void InitList(SeqList &L){
+    L.data = (int *)malloc(InitSize * sizeof(int));
+    L.length = 0;
+    L.MaxSize = InitSize;
+}
+
+//动态增加数组的长度
+void IncreaseSize(SeqList &L\quad int len){
+    int *p = L.data;
+    L.data = (int *)malloc((L.MaxSize + len) * sizeof(int));
+    for(int i = 0; i < L.length ; i++){
+        L.data[i] = p[i];
+    }
+    L.MaxSize = L.MaxSize + len;
+	free(p);
+	
+}
+L.data = (ElemType *)malloc(sizeof(ElemType)* InitSize);
+```
+
 特点：
 
 1.  随机访问
@@ -190,7 +221,7 @@ int main(){
 4.  插入、删除不方便
   
 
-### 2\. 插入、删除
+### 2. 插入
 
 ```C++
 void ListInsert(SqList &L, int i, int e){
@@ -200,7 +231,6 @@ void ListInsert(SqList &L, int i, int e){
     L.data[i-1] = e;
     L.length++;
 } //不够健壮
-​``````C++
 bool ListInsert(SqList &L, int i, int e){
     if( i<1 || i>L.length+1)
         return false;
@@ -221,13 +251,15 @@ bool ListInsert(SqList &L, int i, int e){
 
 最坏： i = 1 n次 O(n)
 
-平均： np + (n-1)p + (n-2)p + ... + p = $$\\frac{n(n+1)}{2}·\\frac{1}{n+1} = \\frac{n}{2} \
-ightarrow$$ O(n)
+平均： np + (n-1)p + (n-2)p + ... + p = $\frac{n(n+1)}{2}·\frac{1}{n+1} = \frac{n}{2} \rightarrow$ O(n)
 
+### 3. 删除
 ```C++
+//删除操作
 Bool ListDelete(SqList &L, int i, int &e){
     if ( i<1 || i > L.length)
         return false;
+    e = L.data[i-1];
     for(int j=i; j < L.length; j++){
         L.data[j-1]= L.data[j];
     }
@@ -241,21 +273,22 @@ int main(){
     
     int e = -1;
     if (ListDelete(L, 3, e))
-        printf("已删除第3个元素，删除元素值为 = %d
-", e);
+        printf("已删除第3个元素，删除元素值为 = %d", e);
     else
-        printf("位序i不合法，删除失败
-");
+        printf("位序i不合法，删除失败");
     return 0;
 }
 ```
 
-时间复杂度： $$\\frac{n-1}{2} \
-ightarrow O(n)$$
+时间复杂度： $\frac{n-1}{2} \rightarrow O(n)$
 
-### 3\. 查找
+### 4. 查找
 
 ```C++
+//按位查找
+ElemType GetElem(SeqList L, int i){
+    return L.data[i-1];
+}
 //在顺序表L VS查找第一个元素值等于e的元素，并返回其位序
 int LocateElem(SeqList L, int e){
     for(int i=0; i<L.length; i++){
@@ -266,20 +299,21 @@ int LocateElem(SeqList L, int e){
 }
 ```
 
-时间复杂度： $$\\frac{n}{2} \
-ightarrow O(n)$$
+时间复杂度：$\frac{n}{2} \rightarrow O(n)$
+
+
 
 ## 三、链表
 
-### 1\. 单链表
+### 1. 单链表
 
 ```C++
 typedef struct LNode{
     ElemType data;
-    struct Lnode *next;
-}Lnode, *LinkList;
+    struct LNode *next;
+}LNode, *LinkList;
 
-struct LNode * p = (struct Lnode *) malloc (sizeof(struct LNode));
+struct LNode * p = (struct LNode *) malloc (sizeof(struct LNode));
 //增加一个新的结点：在内存中申请一个节点所需空间，并用指针p指向这个结点
 ```
 
@@ -310,12 +344,12 @@ bool InitList(LinkList &L){
 
 #### 插入和删除
 
-按位序：
+##### 按位序插入(带头结点)：
 
 ```C++
 bool ListInsert(LinkList &L, int i, ElemType e){
     if( i<1 )
-        return false;
+        return false
     LNode *p;
     int j = 0 ;
     p = L;
@@ -325,7 +359,7 @@ bool ListInsert(LinkList &L, int i, ElemType e){
     }              //先判断合法性，再执行操作
     if (p==NULL)
         return false;
-    LNode *s = (LNOde *)malloc(sizeof(LNode));
+    LNode *s = (LNode *)malloc(sizeof(LNode));
     s->data = e;
     s->next = p->next;
     p->next = s;
@@ -333,7 +367,50 @@ bool ListInsert(LinkList &L, int i, ElemType e){
 }
 ```
 
-在定结点前插--偷天换日
+##### 按位序插入(不带头结点)
+```C++
+bool ListInsert(LinkList &L, int i, ElemType e){
+    if (i < 1)
+        return false;
+    if(i==1){
+        LNode * s = (LNode *)malloc(sizeof(LNode));
+		s -> data = e;
+		s -> next = L;
+		L = s ;
+		return true;
+	}
+	LNode *p;
+    int j = 1 ;
+    p = L;
+    while (p != NULL && j< i-1){
+        p = p->next;
+        j++;
+    }              //先判断合法性，再执行操作
+    if (p==NULL)
+        return false;
+    LNode *s = (LNode *)malloc(sizeof(LNode));
+    s->data = e;
+    s->next = p->next;
+    p->next = s;
+    return true;
+
+}
+```
+##### 在定结点后插 
+```C++
+bool InsertNextNode(LNode *p, ElemType e){
+    if(p == NULL)
+        return false;
+    LNode *s = (LNode *)malloc(sizeof(LNode));
+    if (s == NULL)
+        return false;
+    s->data = e;
+    s->next = p->next;
+	p->next = s;
+	return true;
+}
+```
+##### 在定结点前插--偷天换日
 
 ```C++
 bool InsertPriorNode(Lnode *p, ElemType e){
@@ -350,7 +427,7 @@ bool InsertPriorNode(Lnode *p, ElemType e){
 }
 ```
 
-按位序删除
+##### 按位序删除(带头结点)
 
 ```C++
 bool ListDelete(LinkList &L, int i, ElemType &e){
@@ -375,9 +452,10 @@ bool ListDelete(LinkList &L, int i, ElemType &e){
 }
 ```
 
-删除指定结点：
+##### 删除指定结点：
 
 ```C++
+//如果是最后一个元素有bug
 bool DeleteNode( LNode *p ){
     if (p == NULL)
         return false;
@@ -391,7 +469,7 @@ bool DeleteNode( LNode *p ){
 
 #### 查找
 
-按位查找
+##### 按位查找
 
 ```c++
 LNode * GetElem(LinkList L, int i){
@@ -401,7 +479,7 @@ LNode * GetElem(LinkList L, int i){
     LNode *p;
     int j = 0;
     p = L;
-    while ( p!= NULL && j < 1){
+    while ( p!= NULL && j < i){
         p = p->next;
         j++;
     }
@@ -409,7 +487,7 @@ LNode * GetElem(LinkList L, int i){
 }
 ```
 
-按值查找
+##### 按值查找
 
 ```C++
 LNode * LocateElem(LinkList L, ElemType e){
@@ -429,7 +507,7 @@ $$
 \rightarrow 核心： 初始化、插入
 $$
 
-尾插法：
+##### 尾插法：
 
 ```C++
 LInkList List_TailInsert(LinkList &L){
@@ -798,6 +876,7 @@ bool DeQueue(LinkQueue &Q, ElemType x){
 
 ![image-20200908100222007](/Applications/Joplin.app/Contents/Library/Application%20Support/typora-user-images/image-20200908100222007.png)
 
+
 ```C++
 #define MaxSize 10
 typedef struct{
@@ -915,7 +994,7 @@ $$
 
 ## 基本操作
 
-```
+```cpp
 StrAssign(&T,chars):赋值
 StrCopy(&T,S):复制
 StrEmpty(S):判空
