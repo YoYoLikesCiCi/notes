@@ -1,4 +1,5 @@
 Computer Network
+
 # Chapter1 -- 体系结构
 
 $$ \left \{ \begin{matrix}概述  \left \{ \begin{matrix} 概念、组成、功能、分类 \\ 标准化工作及相关组织 \\ 性能指标 \end{matrix} \right. \\ 体系结构\&参考模型  \left \{ \begin{matrix} 分层结构 \\ 协议、接口、服务 \\ ISO/OSI模型\\ TCP/IP模型 \end{matrix} \right.\end{matrix} \right.$$ 
@@ -9,6 +10,7 @@ $$ \left \{ \begin{matrix}概述  \left \{ \begin{matrix} 概念、组成、功�
 简而言之: 互联的、自治的计算机集合.
 
 ### 功能
+
 1. <mark>数据通信 </mark> (传输文件,email)
 2. <mark>资源共享 </mark> (print,teamviewer)
 3. 分布式处理
@@ -21,13 +23,15 @@ $$ \left \{ \begin{matrix}概述  \left \{ \begin{matrix} 概念、组成、功�
  硬件、软件、协议
 
 ### 2. 工作方式
- $$ \left \{ \begin{matrix}边缘部分 -- 用户直接使用  \left \{ \begin{matrix}C/S方式 //  P2P方式  \end{matrix} \right. \\ 核心部分 -- 为边缘部分服务 \end{matrix} \right.$$ 
+ $$ \left \{ \begin{matrix}边缘部分 -- 用户直接使用  \left \{ \begin{matrix}C/S方式 \\  P2P方式  \end{matrix} \right. \\ 核心部分 -- 为边缘部分服务 \end{matrix} \right.$$ 
 
 ### 3. 功能组成  
 $$ \left \{ \begin{matrix}通信子网  -- 实现数据通信  \\ 资源子网 --  实现资源共享/数据处理 \end{matrix} \right.$$ 
 
-## 分类 
+## 分类
+
 ### 按分布范围
+
   广域网WAN   
   城域网MAN   
   局域网LAN   
@@ -230,14 +234,14 @@ RJ45、802.3
 2. OSI先出现,参考模型先于协议发明,不偏向特定协议
 3. TCP/IP设计之初就考虑到异构网互联问题,将IP作为重要层次
 4. 
-|   | ISO/OSI参考模型  | TCP/IP模型  | 
+|   | ISO/OSI参考模型  | TCP/IP模型  |
 |---|---|---|
-| 网络层  |  无连接+面向连接 | 无连接 |  
-| 传输层  |  面向连接  |  无连接+面向连接  |  
+| 网络层  |  无连接+面向连接 | 无连接 |
+| 传输层  |  面向连接  |  无连接+面向连接  |
 
 ### 五层参考模型
 综合了OSI 和 TCP/IP的优点
-|  层次 |  应用  |  协议 | 
+|  层次 |  应用  |  协议 |
 | --- | ---| ---|
 | 应用层 | 支持各种网络应用 |  FTP、SMTP、HTTP |
 | 传输层 | 进程-进程的数据传输 | TCP、UDP |
@@ -258,7 +262,7 @@ RJ45、802.3
  > 2. 电气特性:规定传输二进制位时,线路上信号的电压范围、阻抗匹配、传输速率和距离限制等.
  > 3. 功能特性:指明某条线上出现的某一电平表示何种意义,接口部件的信号线的用途.
  > 4. 规程特性(过程特性): 定义各条物理线路的工作规程和时序的关系.
- 
+
 ![](http://picbed.yoyolikescici.cn/uPic/20201220222939.png)
 
 - 通信目的: 传送消息
@@ -354,7 +358,7 @@ $$
 在带宽受限且有噪声的信道中,不产生误差的信息传输速率有上限值.
 $$
 信道的极限数据传输速率 = W \log_{2}{(1+S/N)}  (b/s) 
-$$ 
+$$
 
 #### 结论
 1. 信道的带宽或信道中的信噪比越大,信息的极限传输速率就越高.  
