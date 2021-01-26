@@ -1,0 +1,127 @@
+{
+  "main": {
+    "id": "7ee644042031ae9d",
+    "type": "split",
+    "children": [
+      {
+        "id": "589cf631026b8281",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "temp/读书越多，不想输出.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2ae66401c8af4a28",
+    "type": "split",
+    "children": [
+      {
+        "id": "597134ccaed3f49b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ee445a39b251c78b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "5f25992b8c28c698",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "f8cfe598713b3d41",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b57adadab409948f",
+    "type": "split",
+    "children": [
+      {
+        "id": "f386a7efb80b00dc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "50a2c7b09730c6e8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "temp/读书越多，不想输出.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": true,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "540f45919e08ae80",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "2c0efc60d50a44a0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "temp/读书越多，不想输出.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "lastOpenFiles": [
+    "temp/Untitled.md",
+    "temp/软著申请注意.md",
+    "notes/第一行代码1-2.md",
+    "notes/第一行代码 3-4.md",
+    "安徽建筑/心理课/心理第五课-大学生恋爱与性心理.md",
+    "Postgraduate/DataStruct.md",
+    "tools_notes/iterm2_shotcuts.md",
+    "流程图.md",
+    "Postgraduate/OperatingSystem.md"
+  ]
+}
