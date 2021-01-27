@@ -4,15 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "589cf631026b8281",
+        "id": "f9d2cf3ab535a6c2",
         "type": "leaf",
         "active": true,
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "temp/读书越多，不想输出.md",
-            "mode": "source"
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -77,7 +74,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "temp/读书越多，不想输出.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,26 +98,26 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "temp/读书越多，不想输出.md"
-              }
+              "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
     "width": 300
   },
   "lastOpenFiles": [
-    "temp/Untitled.md",
-    "temp/软著申请注意.md",
-    "notes/第一行代码1-2.md",
-    "notes/第一行代码 3-4.md",
-    "安徽建筑/心理课/心理第五课-大学生恋爱与性心理.md",
-    "Postgraduate/DataStruct.md",
-    "tools_notes/iterm2_shotcuts.md",
+    "networkSecurity.md",
+    "graduation.md",
     "流程图.md",
-    "Postgraduate/OperatingSystem.md"
+    "notes/Linux教程.md",
+    "notes/git学习.md",
+    "memory/高中作文/必修5第一篇  智能穿戴设备兴起与发展.md",
+    "安徽建筑/论文/心理课PERMA理论.md",
+    "安徽建筑/论文/心理课ABCDE理论.md",
+    "temp/Untitled.md",
+    "temp/软著申请注意.md"
   ]
 }
