@@ -1,0 +1,10 @@
+{
+  "defaultViewMode": "preview",
+  "showLineNumber": true,
+  "newFileLocation": "current",
+  "newLinkFormat": "absolute",
+  "vimMode": false,
+  "useMarkdownLinks": true,
+  "promptDelete": false,
+  "fileSortOrder": "byModifiedTime"
+}

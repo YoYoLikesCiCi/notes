@@ -4,9 +4,8 @@
     "type": "split",
     "children": [
       {
-        "id": "f9d2cf3ab535a6c2",
+        "id": "51511312d7cdaee3",
         "type": "leaf",
-        "active": true,
         "state": {
           "type": "empty",
           "state": {}
@@ -77,7 +76,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
-                "backlinkCollapsed": true,
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
                 "unlinkedCollapsed": false
               }
             }
@@ -94,7 +95,7 @@
             }
           },
           {
-            "id": "2c0efc60d50a44a0",
+            "id": "787c965895ea8a48",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -106,18 +107,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 245
   },
+  "active": "51511312d7cdaee3",
   "lastOpenFiles": [
-    "networkSecurity.md",
-    "graduation.md",
-    "流程图.md",
-    "notes/Linux教程.md",
-    "notes/git学习.md",
-    "memory/高中作文/必修5第一篇  智能穿戴设备兴起与发展.md",
-    "安徽建筑/论文/心理课PERMA理论.md",
-    "安徽建筑/论文/心理课ABCDE理论.md",
-    "temp/Untitled.md",
-    "temp/软著申请注意.md"
+    "Future/未命名.md",
+    "Future/随想摘录.md",
+    "Future/2021 影单.md",
+    "Postgraduate/ComputerNetwork.md",
+    "计算机/家庭局域网/黑群晖安装QB.md",
+    "计算机/家庭局域网/未命名.md",
+    "计算机/SwiftUI/MacOS_VIM+LaTeX.md",
+    "计算机/SwiftUI/SwiftUI页面跳转.md",
+    "计算机/黑群晖安装QB.md",
+    "计算机/未命名.md"
   ]
 }
