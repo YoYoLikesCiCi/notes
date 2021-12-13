@@ -1,14 +1,17 @@
 {
   "main": {
-    "id": "7ee644042031ae9d",
+    "id": "4d1219fbb13d81b9",
     "type": "split",
     "children": [
       {
-        "id": "51511312d7cdaee3",
+        "id": "e0b8afc7d59a2718",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "流程图.md",
+            "mode": "preview"
+          }
         }
       }
     ],
@@ -73,6 +76,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "流程图.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +103,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "流程图.md"
+              }
             }
           }
         ],
@@ -107,19 +113,20 @@
       }
     ],
     "direction": "horizontal",
-    "width": 245
+    "width": 245,
+    "collapsed": true
   },
-  "active": "51511312d7cdaee3",
+  "active": "e0b8afc7d59a2718",
   "lastOpenFiles": [
-    "Future/未命名.md",
-    "Future/随想摘录.md",
+    "流程图.md",
+    "Postgraduate/DataStruct.md",
+    "notes/鸟哥的Linux.md",
+    "notes/网络互联技术.md",
+    "notes/信息安全数学.md",
+    "Future/已读书单.md",
     "Future/2021 影单.md",
-    "Postgraduate/ComputerNetwork.md",
-    "计算机/家庭局域网/黑群晖安装QB.md",
-    "计算机/家庭局域网/未命名.md",
-    "计算机/SwiftUI/MacOS_VIM+LaTeX.md",
-    "计算机/SwiftUI/SwiftUI页面跳转.md",
-    "计算机/黑群晖安装QB.md",
-    "计算机/未命名.md"
+    "Future/未命名.md",
+    "计算机/Django 官网笔记.md",
+    "计算机/Go黑皮书.md"
   ]
 }
