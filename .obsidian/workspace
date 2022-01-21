@@ -1,126 +1,116 @@
 {
   "main": {
-    "id": "4d1219fbb13d81b9",
+    "id": "2e7c1433948d8ad5",
     "type": "split",
     "children": [
       {
-        "id": "b3d4b125ae26e3d9",
+        "id": "03298ab57843a54b",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "安徽建筑/论文/心理课ABCDE理论.md",
+            "mode": "preview"
+          }
         }
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "2ae66401c8af4a28",
-    "type": "split",
+    "id": "c870d247cdad2a1d",
+    "type": "mobile-drawer",
     "children": [
       {
-        "id": "597134ccaed3f49b",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "ee445a39b251c78b",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {}
-            }
-          },
-          {
-            "id": "5f25992b8c28c698",
-            "type": "leaf",
-            "state": {
-              "type": "search",
-              "state": {
-                "query": "",
-                "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical"
-              }
-            }
-          },
-          {
-            "id": "f8cfe598713b3d41",
-            "type": "leaf",
-            "state": {
-              "type": "starred",
-              "state": {}
-            }
+        "id": "81fa7c15fb73fec5",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {}
+        }
+      },
+      {
+        "id": "ebe99ff3cff83653",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
           }
-        ]
+        }
+      },
+      {
+        "id": "879b6e25aec0d8ca",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true
+          }
+        }
+      },
+      {
+        "id": "f654d71378dfe874",
+        "type": "leaf",
+        "state": {
+          "type": "starred",
+          "state": {}
+        }
       }
     ],
-    "direction": "horizontal",
-    "width": 300
+    "currentTab": 0
   },
   "right": {
-    "id": "b57adadab409948f",
-    "type": "split",
+    "id": "c3b13ebe336c048c",
+    "type": "mobile-drawer",
     "children": [
       {
-        "id": "f386a7efb80b00dc",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "50a2c7b09730c6e8",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": false
-              }
-            }
-          },
-          {
-            "id": "540f45919e08ae80",
-            "type": "leaf",
-            "state": {
-              "type": "tag",
-              "state": {
-                "sortOrder": "frequency",
-                "useHierarchy": true
-              }
-            }
-          },
-          {
-            "id": "787c965895ea8a48",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {}
-            }
+        "id": "6d66ca7ad0984bad",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "安徽建筑/论文/心理课ABCDE理论.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
           }
-        ],
-        "currentTab": 2
+        }
+      },
+      {
+        "id": "6060da28471f8e04",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "安徽建筑/论文/心理课ABCDE理论.md"
+          }
+        }
       }
     ],
-    "direction": "horizontal",
-    "width": 245,
-    "collapsed": true
+    "currentTab": 0
   },
-  "active": "b3d4b125ae26e3d9",
+  "active": "03298ab57843a54b",
   "lastOpenFiles": [
-    "Postgraduate/未命名.md",
-    "Postgraduate/ComputerNetwork.md",
-    "Postgraduate/DataStruct.md",
-    "Postgraduate/OperatingSystem.md",
-    "tools_notes/iterm2_shotcuts.md",
-    "tools_notes/NERDTree_shorcuts.md",
-    "tools_notes/tagbar_shortcuts.md",
-    "tools_notes/vim_shortcuts.md",
-    "tools_notes/vimium_shorcuts.md",
-    "PTLevel.md"
+    "安徽建筑/论文/心理课ABCDE理论.md",
+    "memory/书影音/2021 影单.md",
+    "memory/书影音/2021 书单.md",
+    "memory/书影音/已读书单.md",
+    "Future/2022 影单.md",
+    "计算机/Go黑皮书.md",
+    "Type-C 扩展器 方案指南（Thunderbolt Alternative Mode 篇） -  0d2805d4743f46b793107bd91fa59ac1.md",
+    "Future/随想摘录.md",
+    "计算机/SwiftUI/项目重构笔记.md",
+    "计算机/SwiftUI/项目任务.md"
   ]
 }

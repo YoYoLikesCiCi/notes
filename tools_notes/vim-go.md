@@ -1,0 +1,23 @@
+-   Compile your package with `:GoBuild`, install it with `:GoInstall` or test it with `:GoTest`. Run a single test with `:GoTestFunc`).
+-   Quickly execute your current file(s) with `:GoRun`.
+-   Improved syntax highlighting and folding.
+-   Debug programs with integrated [`delve`](https://github.com/go-delve/delve) support with `:GoDebugStart`.
+-   Completion and many other features support via `gopls`.
+-   formatting on save keeps the cursor position and undo history.
+-   Go to symbol/declaration with `:GoDef`.
+-   Look up documentation with `:GoDoc` or `:GoDocBrowser`.
+-   Easily import packages via `:GoImport`, remove them via `:GoDrop`.
+-   Precise type-safe renaming of identifiers with `:GoRename`.
+-   See which code is covered by tests with `:GoCoverage`.
+-   Add or remove tags on struct fields with `:GoAddTags` and `:GoRemoveTags`.
+-   Call [`staticcheck`](https://staticcheck.io/) with `:GoMetaLinter` to invoke all possible linters (`golint`, `vet`, `errcheck`, `deadcode`, etc.) and put the result in the quickfix or location list.
+-   Lint your code with `:GoLint`, run your code through `:GoVet` to catch static errors, or make sure errors are checked with `:GoErrCheck`.
+-   Advanced source analysis tools utilizing `guru`, such as `:GoImplements`, `:GoCallees`, and `:GoReferrers`.
+-   ... and many more! Please see [doc/vim-go.txt](https://github.com/fatih/vim-go/blob/master/doc/vim-go.txt) for more information.
+-   Integration with [`gopls`](https://github.com/golang/tools/blob/master/gopls/README.md).
+-   The `gopls` instance can be shared with other Vim plugins.
+-   Vim-go's use of `gopls` can be disabled and alternative tools can be used when desired.
+-   Integration with [`Tagbar`](https://github.com/preservim/tagbar) via [`gotags`](https://github.com/jstemmer/gotags).
+-   Integration with [`Ultisnips`](https://github.com/SirVer/ultisnips) and other snippet engines.
+
+## [](https://github.com/fatih/vim-go#install)
