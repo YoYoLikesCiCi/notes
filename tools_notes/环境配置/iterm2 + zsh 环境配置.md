@@ -10,3 +10,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # 6. 安装主题， powerlevel10k
 https://github.com/romkatv/powerlevel10k#homebrew
 
+# 7.安装colorls
+https://github.com/athityakumar/colorls
+sudo gem install colorls
+
+# 8.代码统计工具
+brew install cloc

@@ -1,28 +1,16 @@
 {
   "main": {
-    "id": "2e7c1433948d8ad5",
+    "id": "77959d94f78d09d0",
     "type": "split",
     "children": [
       {
-        "id": "03298ab57843a54b",
+        "id": "dc1613611c67fa5e",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Future/2022 影单.md",
-            "mode": "source",
-            "source": false
-          }
-        }
-      },
-      {
-        "id": "ae157e6c82e84246",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "Future/2022 影单.md",
-            "mode": "source",
+            "file": "Computer/Go黑皮书.md",
+            "mode": "preview",
             "source": false
           }
         }
@@ -31,15 +19,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "7db1aa70d381f537",
+    "id": "4de3365b0ac7d465",
     "type": "split",
     "children": [
       {
-        "id": "b722af265987eb3c",
+        "id": "036a78a4bb4f824d",
         "type": "tabs",
         "children": [
           {
-            "id": "1eec3150f4b0b417",
+            "id": "97fa35c6e3688159",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -47,7 +35,7 @@
             }
           },
           {
-            "id": "30d9a8955ea6456e",
+            "id": "79ca9c10ab99899b",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -62,7 +50,7 @@
             }
           },
           {
-            "id": "d4c138023cd685ba",
+            "id": "e7db8f113958c554",
             "type": "leaf",
             "state": {
               "type": "starred",
@@ -76,20 +64,20 @@
     "width": 300
   },
   "right": {
-    "id": "e7f02b8e6c5f0983",
+    "id": "fb6b290f403c0b8d",
     "type": "split",
     "children": [
       {
-        "id": "a22f84d7f5be6f1d",
+        "id": "d83265e10d315627",
         "type": "tabs",
         "children": [
           {
-            "id": "6e5ff39ba428ce6e",
+            "id": "89d1e0e35579e705",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Future/2022 影单.md",
+                "file": "Computer/Go黑皮书.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,7 +89,7 @@
             }
           },
           {
-            "id": "a320fba49bc3acfd",
+            "id": "87d5c12a6ff83a56",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -112,12 +100,12 @@
             }
           },
           {
-            "id": "a86a8e8edc3b8cc9",
+            "id": "61e733cf4c744dfa",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Future/2022 影单.md"
+                "file": "Computer/Go黑皮书.md"
               }
             }
           }
@@ -128,17 +116,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "03298ab57843a54b",
+  "active": "dc1613611c67fa5e",
   "lastOpenFiles": [
-    "Future/2022 影单.md",
-    "计算机/go/VIM-GO安装.md",
-    "tools_notes/环境配置/iterm2 + zsh 环境配置.md",
-    "tools_notes/vim-go.md",
-    "TheCW_vim_tutor.md",
+    "Computer/Go黑皮书.md",
     "graduation.md",
+    "list_of_symbols.md",
+    "TheCW_vim_tutor.md",
+    "流程图.md",
+    "关于BountyHunter.md",
+    "Swift_CS193p.md",
     "networkSecurity.md",
-    "Type-C 扩展器 方案指南（Thunderbolt Alternative Mode 篇） -  0d2805d4743f46b793107bd91fa59ac1.md",
-    "Type-C 扩展器 方案指南（Thunderbolt Alternative Mode 篇） -  0d2805d4743f46b793107bd91fa59ac1/v2-05ffda4a09e846111fa12c67d00f3e9a_1440w.jpg",
-    "tools_notes/iterm2_shotcuts.md"
+    "Computer/Algorithms/DataStruct.md",
+    "Computer/Algorithms/sord.md"
   ]
 }
