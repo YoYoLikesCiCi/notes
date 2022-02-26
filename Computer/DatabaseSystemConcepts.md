@@ -271,6 +271,117 @@ select dept_name, ID, avg(salary) from instructor group by dept_name;
 
 3.7.3 having 
 - having 修饰 group by
+包含聚集、group by或having子句的查询的含义可通过下述操作序列定义:
+1. 最先根据from计算出一个关系
+2. 如果出现where子句,where子句的谓语作用到from子句的结果关系上; 
+3. 如果出现group by 子句, 满足where谓词的元组通过group by 形成分组. 如果没有,就当成一个分组
+4. 如果出现having子句, 应用到每个分组上. 
+5. select 利用剩下的分组产生查询结果中的元组.  
+
+对于在2008年讲授的每个课程段,如果该课程段至少2名学生选课,找出选修该课程段的所有学生的总学分的平均值. 
+```sql
+select course_id, semester, year, sec_id, avg(tot_cred) 
+from takes natural join student 
+where year = 2009 
+group by course_id, semester, year, see_id 
+haaving count(ID) >= 2;
+```
+
+### 3.7.4 对空值和布尔值的聚集
+- 除了count(*) 外所有的聚集函数都忽略输入集合中的控制. 
+- 空集的count运算值为0, 其他所有聚集运算在输入为空集的情况下返回一个空值. 
 
 
+## 3.8 嵌套子查询  
+### 集合成员资格 in not in
+```sql
+select distinct course_id 
+from section
+where semester = 'Fall' and year = 2009 and 
+course_id not in (select course_id 
+from section 
+where semester = 'Spring' and year = 2010); 
+```
 
+### 3.8.2 集合的比较 
+-  >some : 至少比某一个要大  
+   找出满足工资至少比biology系某一个教师的工资要高的教师的姓名
+```sql
+select dintinct T.name from instructor as T, instructor as S where T.salary > S.salary and S.dept_name = 'Biology' ;
+
+select name from instructor where salary > some (select salary from instructor where dept_name = 'Biology'); 
+```
+
+### 3.8.3 空关系测试 exist
+```sql
+select course_id from sectioin as S
+where semester = 'Fall' and year = 2009 and 
+exists (select * from section as T 
+where semester = 'Spring' and year = 2010 and S.course_id = T.course_id); 
+```
+
+### 3.8.4 重复元组存在性测试 unique
+有些数据库不支持   
+找出所有在2008 年最多开设一次的课程  
+```sql 
+select T.course_id from course as T
+where unique (select R.course_id from section as R where T.course_id = R.course_id and R.year = 2009);
+```
+
+### 3.8.5 from 子句中子查询 
+找出系平均工资超过42000美元的那些系中教师的平均工资  
+```sql
+select dept_name, avg_salary from ( select dept_name, avg (salary) as avg_salary from instructor group by dept_name ) where avg_salary > 42000;  
+```
+
+### 3.8.6 with
+定义提供临时关系的方法,只对包含with子句的查询有效  
+```sql
+with max_budget (value) as (select max(budget) from department)
+select budget from department, max_budget where department.budget = max_budget.value;  
+
+```
+with 子句中定义了临时关系max_budget, 此关系在随后的查询中马上被使用了.  
+
+### 3.8.7 标量子查询 
+sql允许查询出现在返回单个值的表达式能够出现的任何地方,只要该子查询只返回包含单个属性的单个元组; 
+```sql
+select dept_name, (
+select count(*) from instructor where department.dept_name = instructor.dept_name)
+as num_instructors
+from department;
+```
+
+## 3.9 数据库的修改 
+### 3.9.1 删除
+```sql
+delete from r whre P;
+```
+- 一次只能从一个关系中删除元组,但通过嵌套,可以引用任意数目的关系.   
+- delete语句首先测试 关系中的元组再执行.
+
+### 3.9.2 插入
+- 在执行插入前执行完select语句非常重要. 
+```sql
+insert into course( course_id, title, dept_name, credits ) 
+values ('CS-437', 'Database Systems', 'Comp.Sci.', 4);
+
+//让MUSIC系每个修满144学分的学生称为music系的教师, 工资18000
+insert into instructor 
+select ID, name, dept_name, 18000 
+from student 
+where dept_name = 'Music' and tot_cred > 144 ;
+```
+- 如果只给出部分属性的值,其余属性将被赋空值,用null表示.  
+
+### 3.9.3 更新
+```sql
+update instructor set salary = salary * 1.03 where salary > 100000;
+
+update instructor set salary = case 
+    when salary <= 100000 then salary * 1.05
+	else salary * 1.03 
+	end
+```
+
+<++>
