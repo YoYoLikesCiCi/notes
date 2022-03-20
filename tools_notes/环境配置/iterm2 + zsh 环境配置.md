@@ -1,3 +1,10 @@
+---
+title: iterm2 + zsh 环境配置
+date: 2022-01-26 00:00:00
+tags: zsh
+categories: 重剑无锋
+---
+
 # 1. 先安装homebrew 和 iterm2
 # 2. 从catalina开始，zsh是所有新建用户账户的默认shell，不需要重新安装。
 # 3. 安装 oh-my-zsh 。

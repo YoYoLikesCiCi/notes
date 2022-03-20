@@ -3,7 +3,7 @@
   "showLineNumber": true,
   "newFileLocation": "current",
   "newLinkFormat": "absolute",
-  "vimMode": false,
+  "vimMode": true,
   "useMarkdownLinks": true,
   "promptDelete": false,
   "fileSortOrder": "byModifiedTime",

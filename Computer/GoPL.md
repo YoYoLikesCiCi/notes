@@ -72,7 +72,7 @@ const(
 - bytes 包用于操作字节slice([]bytes类型,某些属性和字符串相同)  
 - strconv 主要用于转换布尔值、整数、浮点数为与之对应的字符串形式.  
 - unicode 包具备判别文字符号值特性的函数,如 IsDigit、 IsLetter、 IsUpper和IsLower.  
-
+- 允许以索引号访问字节数组(非字符),但不能获取元素地址
 
 Buffer类型:
 ```go
@@ -107,31 +107,38 @@ func main() {
 ## 4.1 数组
 
 ```go
+//三种声明方式
 var a [3]int
 var b =  [3]int{1,2,3}
 var c = [...]bool{true, false, true, false}
+var d = [...]int{10,3:100}
 
 for _, value := range cityArray{
  fmt.Println(value) 
 }
 ```
 
+- 长度不同的数组不属于同一类型
+- 定义多维数组时,只有第一纬度允许使用“...”
+- go数组是值类型,不同于C,赋值和传参都会复制整个数组数据.
+- 下标包头不包尾
+- 
 Go中函数参数中的数组使用值传递.
 
 ## 4.2 slice
 表示一个拥有相同类型元素的可变长度的序列. 
 
 ```go
-var array = [10]int{1,2,3,4,5,6,7,8,9,10}   
-var a []int
-var b = []int{1,2,3}
+var array = [10]int{1,2,3,4,5,6,7,8,9,10}   //数组
+var a []int //切片
+var b = []int{1,2,3}  //切片
 c := array[1:4]
 d := array[0:len(array)]
 e := make([]int, 5, 10)
 a = append(a, 10)  //切片扩容 
 
 // copy切片
-f := make([]int, 5, 5)
+f := make([]int, 5, 5)  //切片
 copy(f,a)
 
 // 切片的删除
@@ -143,7 +150,8 @@ a = append(a[0:2], a[3:]...) 删除第3个元素
 - 三属性: 长度、容量、指针
 - slice无法做比较
 - slice类型的零值是nil, 检查是否为空用 len(s) == 0, 因为 s != nil 的情况下,slice也有可能是空.  
-
+- 在旧切片截取出来的新切片,依旧指向原来的底层数组,修改对所有关联切片可见  
+- 
 
 ## 4.3 map
 ```go
@@ -160,7 +168,8 @@ a = append(a[0:2], a[3:]...) 删除第3个元素
 
 
 - 键的类型k,必须是可以通过操作符==来进行比较的数据类型(点名slice)
-
+- 运行时会对字典并发操作做出检测,如果冲突会导致进程崩溃
+- 
 ## 4.4 结构体
 
 ```go
@@ -192,16 +201,16 @@ type person struct{
 
 ```go
 type Person struct{
-string 
-int 
+    string 
+    int 
 }
 
 func main(){
-p1 := Person{
-string: "jj"
-int : 18
+    p1 := Person{
+    string: "jj"
+    int : 18
 }
-fmt.Println(p1.string, p1.int)
+    fmt.Println(p1.string, p1.int)
 }
 ```
 
@@ -432,7 +441,7 @@ func sum(vals ...int) int {
 }
 ```
 
-## 5.8 defer延迟函数调用（不太理解）
+## 5.8 defer延迟函数调用
 - 延迟执行的函数在return语句之后执行，并且可以更新函数的结果变量。 
 - 最先defer的语句最后执行，最后defer的语句最先执行 
 

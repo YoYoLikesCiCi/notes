@@ -90,3 +90,41 @@ void mergeSort(int a[], int low, int high) {
 ```
 
 ## 5. Quick Sort 
+1. 分区, a[i]
+  s1 = a[i+1..m],  <= p   
+  s2 = a[m+1..k-1], >= p    
+  s3 = a[k...j]  未分配  
+
+  ```c++
+  int partition(int a[], int i, int j) {
+  int p = a[i]; // p 是 pivot
+  int m = i; // S1 和 S2 一开始是空的
+  for (int k = i+1; k <= j; k++) { // 探索未知的区域
+    if (a[k] < p) { // case 2
+      m++;
+      swap(a[k], a[m]); // C++ STL algorithm std::swap
+    } // 注意：在情况1的时候我们什么都不做: a[k] >= p
+  }
+  swap(a[i], a[m]); // 最后一步, 用a[m]交换 pivot
+  return m; // 返回pivot的索引, 用于快速排序（Quick Sort）
+}
+
+
+
+void quickSort(int a[], int low, int high) {
+  if (low < high) {
+    int m = partition(a, low, high); // O(N)
+    // a[low..high] ~> a[low..m–1], pivot, a[m+1..high]
+    quickSort(a, low, m-1); // 递归地将左侧子数列排序
+    // a[m] = pivot 在分区后就被排序好了
+    quickSort(a, m+1, high); // 然后将右侧子数列排序
+  }
+}
+  ```
+
+  <++>
+
+## 6.Counting Sort计数排序 O(n)  
+小范围的整数,根据排序出现频率排序  
+
+## Radix Sort
