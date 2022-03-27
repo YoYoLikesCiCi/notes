@@ -4,15 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "6d169e76726e9224",
+        "id": "9eb603b4a561fab4",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "Future/2022 影单.md",
-            "mode": "preview",
-            "source": false
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -77,7 +73,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Future/2022 影单.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,9 +99,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Future/2022 影单.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -116,8 +109,9 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "6d169e76726e9224",
+  "active": "9eb603b4a561fab4",
   "lastOpenFiles": [
+    "Computer/SwiftUI/项目重构笔记.md",
     "Future/2022 影单.md",
     "Computer/GoPL.md",
     "Postgraduate/MacBook已锁定应用程序如何卸载.md",
@@ -126,7 +120,6 @@
     "Computer/Algorithms/sort.md",
     "Computer/go/GoWebProgramming.md",
     "tools_notes/Markdown目录树、锚（anchor）和页内跳转.md",
-    "Computer/go/Tutorial for vim-go.md",
-    "Computer/go/VIM-GO安装.md"
+    "Computer/go/Tutorial for vim-go.md"
   ]
 }

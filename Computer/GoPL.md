@@ -339,6 +339,7 @@ func intSum(a int, b int) int {
 	return ret
 }
 // 可变参数，固定参数和可变参数同时出现时，可变参数要放在最后
+// 变参本质上是一个切片,只能接受一到多个同类型参数
 func intSum2(a ...int) int {
     ret := 0
 	for _, arg := range a {
@@ -362,6 +363,33 @@ func main(){ // 匿名函数
 - 有些函数的声明没有函数体，说明这个函数使用了Go以外的语言实现。
 - 一个函数如果有命名的返回值，可以省略return语句的操作数，被称为裸返回。
 
+
+## 5.4 错误处理
+```go
+// 标准库将error定义成接口类型,以便实现自定义错误类型
+type error interface{
+	Error() string
+}
+
+var errDivByZero = errors.New("division by zero")
+
+func div(x,y int)(int,error ){
+	if y == 0{
+		return 0,errDivByZero
+	}
+	return x/y, nil
+}
+
+func main(){
+	z,err := div(5,0)
+	if err == errDivByZero{
+		log.Fatalln(err)
+	}
+	println(z)
+}
+```
+
+
 ## 5.5 函数变量
 - 函数零值是nil
 - 函数变量可以和空值比较
@@ -371,6 +399,7 @@ func main(){ // 匿名函数
 
 
 ## 5.6 匿名函数
+指没有定义名字符号的函数  
 ```go
 sayHello := func(){
     fmt.Println("匿名函数")
@@ -383,7 +412,7 @@ func(){
 }()
 
 //闭包 
-// 闭包 = 函数 + 外层变量的引用
+// 闭包 = 函数 + 外层变量的引用(引用环境)
 func a() func() {
     return func(){
         fmt.Println("something")
@@ -391,12 +420,12 @@ func a() func() {
 }
 
 func makeSuffixFunc(suffix string) func(string) string{
-return func(name string string{
-if !strings.HasSuffix(name, suffix) {
-    return name + suffix
-}
-return name
-}
+    return func(name string string{	
+        if !strings.HasSuffix(name, suffix) {
+   			return name + suffix
+		}
+		return name
+	}
 }
 ```
 
@@ -427,6 +456,20 @@ func main(){
 - 函数字面量就行函数声明，但在func关键字后面没有函数的名称。
 - 用这种方式定义的函数能够获取到整个词法环境，因此里层的函数能够使用外层函数中的变量。 
 
+
+## 闭包
+```go 
+func test(x int)func(){
+	return func(){
+		println(x)
+	}
+}
+
+func main(){
+	f := test(123)
+	f()
+}
+```
 ## 捕获迭代变量 p109
 
 ## 5.7 变长函数
@@ -444,7 +487,7 @@ func sum(vals ...int) int {
 ## 5.8 defer延迟函数调用
 - 延迟执行的函数在return语句之后执行，并且可以更新函数的结果变量。 
 - 最先defer的语句最后执行，最后defer的语句最先执行 
-
+- 延迟调用开销挺大
 ## 5.9 panic 宕机
 当宕机发生时，所有的延迟函数以倒序执行，从栈最上面的函数开始一直返回到main函数。 
 
