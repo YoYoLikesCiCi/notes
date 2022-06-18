@@ -22,7 +22,7 @@ var x = 5
 instance : 5 now  
 schemas : x
 
-### 1.3.3 data models 
+### 1.3.3 data models (第七版 1.3.1)
 1. relational model 
 > uses a collection of tables to represent both data and the relationships among those data . 
 2. entity-relationship model 
@@ -33,7 +33,14 @@ schemas : x
 ## 1.4 Database Languages 
 - data-definition language 
 - data-manipulation language 数据操纵语言  
-### 1.4.1 data-manipulation language 
+
+### 1.4.1 DDL
+- 域约束
+- 引用完整性
+- 授权
+
+
+### 1.4.2 data-manipulation language 
 - retrieval 检索
 - insert
 - delete

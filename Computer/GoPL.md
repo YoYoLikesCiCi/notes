@@ -1,6 +1,7 @@
+  
 # 入门
-## 1.2 命令行参数
-``` go
+## 1.2 命令行参数  
+```go
 package main
 import(
 	"fmt"
@@ -27,6 +28,29 @@ func main(){
 - 类型 type
 - 函数 func
 
+
+## 2.21 运算符
+优先级:  
+\* / % << >> & &^  
+\+ - | ^   
+\== != < <= > >=  
+&&  
+||
+
+### 2.21.1 位运算符
+| | | |
+|-------|---|---|  
+| AND     |     按位与：都为1   |  a&b  0101&0011=0001 |  
+| OR      |     按位或：至少一个1  | a\\|b  0101\\|0011=0111  |  |
+| XOR      |    按位亦或：只有一个1   |  a^b  0101^0011=0110  |
+| NOT      |    按位取反   (一元)     |   ^a ^0111=1000  |  
+| AND NOT  |    按位清除   (bit clear) |  a&^b 0110&^1011=0100  |  
+| LEFT SHIFT  |  位左移       |    a<<2 0001<<3=1000   |  
+| RIGHT SHIFT   |    位右移    |       a>>2 1010>>2=0010”  |  
+
+- 位清除和位异或不同.它将左右操作数对应二进制位都为1的重置为0,以达到一次清除多个标记位的目的.  
+
+
 ### iota 
 iota 是go语言的常量计数器， 只能在常量的表达式中使用。 
 iota 在 const 关键字出现的时候将被重置为0. const中每新增一行常量声明将使 iota 计数一次 。 
@@ -38,6 +62,19 @@ const(
 	n3  //2
 	n4 //3
 )
+const(
+	_ = iota //0
+	KB = 1<<(10*iota)  // 1 << (10*1)
+	MB 
+	GB
+)
+
+//如果中断iota自增,则必须显式恢复.且后续自增按行序递增,而非C enum按上一取值递增
+const(
+	a  = iota  //int
+	b float32 = iota  // float32
+	c  = iota  //int 
+)
 ```
 
 
@@ -46,7 +83,28 @@ const(
 - 短变量声明不需要声明所有在左边的变量.  
 - 短变量声明最少声明一个新变量  
 
-# 基本数据
+## 2.22 switch
+``` go
+func main(){
+	a,b,c,x := 1,2,3,2
+
+	switch x{  //多个匹配条件中其一即可
+		case a,b:  //匹配变量
+		println("a|b")  
+		case c:
+		println("c")
+		case 4:
+		println("d")
+		default:
+		println("z")
+	}
+}
+
+
+```
+
+
+# Chapter3 基本数据
 四大类型:
 - 基础类型 basic type 
   - 整数
@@ -63,9 +121,44 @@ const(
 - 引用类型 reference type 
 - 接口类型 interface type 
 
+## 3.5 字符串
+### 3.5.1 转换
+要修改字符串，必须将其转换为可变类型（[]rune or []byte），完成后再转换回来。不管如何转换，都要重新分配内存，并复制数据。
 
+```go
+func pp(format string, ptr interface{}){
+	p := reflect.ValueOf(ptr).Pointer()
+	h := (*uintptr)(unsafe.Pointer(p))
+	fmt.Printf(format, *h)
+}
 
+func main(){
+	s := "hello,world!"
+	pp("s: %x\n", &s)
 
+	bs := []byte(s)
+	s2 := string(bs)
+
+	pp("string to []bytes, bs: %x\n", &bs)
+	pp("[]byte to string, s2: %x\n", &s2)
+
+	rs := []rune(s)
+	s3 := string(rs)
+
+	pp("string to[]rune, rs: %x\n", &rs)
+	pp("[]rune to string, s3:")
+}
+--------
+s:ffe30
+  
+string to[]byte,bs:c82000a2f0
+[]byte to string,s2:c82000a310
+  
+string to[]rune,rs:c820010280
+[]rune to string,s3:c82000a340
+
+--------------
+```
 ## 5.4 字符串和字节slice
 4个标准包对字符串操作特别重要: bytes、 strings、 strconv、 unicode
 - strings包提供了许多函数,用于<mark>搜索、替换、比较、修整、切分和连接字符串</mark> . 
@@ -113,21 +206,50 @@ var b =  [3]int{1,2,3}
 var c = [...]bool{true, false, true, false}
 var d = [...]int{10,3:100}
 
+c = d  // error , c和d不是同一个类型
+
 for _, value := range cityArray{
  fmt.Println(value) 
 }
 ```
 
 - 长度不同的数组不属于同一类型
-- 定义多维数组时,只有第一纬度允许使用“...”
+- 定义多维数组时,只有第一维度允许使用“...”
 - go数组是值类型,不同于C,赋值和传参都会复制整个数组数据.
 - 下标包头不包尾
-- 
-Go中函数参数中的数组使用值传递.
+- 内置函数len和cap都返回第一维长度  
+- 如果元素类型支持“==、！=”操作符，那么数组也支持此操作
+- Go中函数参数中的数组使用值传递.赋值和传参操作都会复制整个数组数据。  
+
+- 对于结构等复合类型，可以省略元素初始化类型标签
+```go 
+func main(){
+	type user struct{
+		name string
+		age byte
+	}
+
+	d := [...]user{
+		{"Tom",20},
+		{"Mary",18}
+	}
+
+	fmt.Printf("%#v\n",d)
+}
+```
 
 ## 4.2 slice
-表示一个拥有相同类型元素的可变长度的序列. 
-
+表示一个拥有相同类型元素的可变长度的序列.   
+切片本身不是动态数组或数组指针。内部通过指针饮用底层数组，设定相关属性将数据读写操作限定在指定区域内。  
+```go
+type slice struct{
+    array unsafe.Pointer  
+	len int  
+	cap int  
+}
+// cap 代表所引用数组片段的真实长度
+//len用于限定可读的写元素数量  
+```
 ```go
 var array = [10]int{1,2,3,4,5,6,7,8,9,10}   //数组
 var a []int //切片
@@ -136,6 +258,10 @@ c := array[1:4]
 d := array[0:len(array)]
 e := make([]int, 5, 10)
 a = append(a, 10)  //切片扩容 
+
+array[2:5]  // [2 3 4] len:3 cap:8  
+array[2:5:7]  // [2 3 4] len:3 cap:5  
+
 
 // copy切片
 f := make([]int, 5, 5)  //切片
@@ -151,11 +277,78 @@ a = append(a[0:2], a[3:]...) 删除第3个元素
 - slice无法做比较
 - slice类型的零值是nil, 检查是否为空用 len(s) == 0, 因为 s != nil 的情况下,slice也有可能是空.  
 - 在旧切片截取出来的新切片,依旧指向原来的底层数组,修改对所有关联切片可见  
-- 
+- 可以获取元素的地址，但不能用虽元素的指针访问元素内容
+- 利用reslice，可以实现一个栈式数据结构： 
+```go
+func main(){
+// 栈最大容量5
+   stack:=make([]int,0,5) 
+  
+    // 入栈 
+   push:=func(x int)error{ 
+       n:=len(stack) 
+       if n==cap(stack) { 
+           return errors.New("stack is full") 
+        } 
+  
+       stack=stack[:n+1] 
+       stack[n] =x
+  
+       return nil
+    } 
+// 出栈 
+pop:=func() (int,error) { 
+    n:=len(stack) 
+    if n==0{ 
+        return 0,errors.New("stack is empty") 
+     } 
+
+    x:=stack[n-1] 
+    stack=stack[:n-1] 
+
+    return x,nil
+ } 
+
+ // 入栈测试 
+for i:=0;i<7;i++ { 
+    fmt.Printf("push%d: %v, %v\n",i,push(i),stack) 
+ } 
+
+ // 出栈测试 
+for i:=0;i<7;i++ { 
+    x,err:=pop() 
+    fmt.Printf("pop: %d, %v, %v\n",x,err,stack) 
+ } 
+}
+
+// 输出：
+// push 0: <nil>, [0] 
+// push 1: <nil>, [0 1] 
+// push 2: <nil>, [0 1 2] 
+// push 3: <nil>, [0 1 2 3] 
+// push 4: <nil>, [0 1 2 3 4] 
+// push 5:stack is full, [0 1 2 3 4] 
+// push 6:stack is full, [0 1 2 3 4] 
+
+// pop:4, <nil>, [0 1 2 3] 
+// pop:3, <nil>, [0 1 2] 
+// pop:2, <nil>, [0 1] 
+// pop:1, <nil>, [0] 
+// pop:0, <nil>, [] 
+// pop:0,stack is empty, [] 
+// pop:0,stack is empty, []
+```
+
+- 数据被追加到超过原底层数组，如果超过cap限制，则为新切片对象重新分配数组。  
+  - 超出cap限制，而不是底层数组长度
+  - 新分配数组长度是原来cap两倍，不是原来数组两倍
+  - 并非总是2被，对于较大的切片，会尝试扩容1/4，以节约内存。  
+
 
 ## 4.3 map
 ```go
     var a map[string]int 
+	c := make(map[string]int)
 	var b := map[string]bool{
 	    "1" : true, 
 		"2" : false,
@@ -169,7 +362,36 @@ a = append(a[0:2], a[3:]...) 删除第3个元素
 
 - 键的类型k,必须是可以通过操作符==来进行比较的数据类型(点名slice)
 - 运行时会对字典并发操作做出检测,如果冲突会导致进程崩溃
-- 
+- 对字典进行迭代，每次返回的键值次序都不相同。  
+- 因为内存访问和哈希算法等缘故，字典被设计成“not addressable”， 不能直接修改value成员。  
+```go
+func main(){
+type user struct{
+    name string 
+	age byte 
+}
+
+    m := map[int]user{
+        1:{"Tom",19}
+}
+    m[1].age += 1   //error : cannot assign to m[1].age  
+
+    u := m[1]
+    u.age += 1  
+    m[1] = u   //set all the value  
+    
+	m2: = map[int]*user{ //value is pointer type  
+	1 : &user("Jack", 20)
+	}
+
+	m2[1].age++  // m[2]1 return a pointer, you can change the value of the target object by poiter 
+
+}
+```
+
+- 不能对空字典进行写操作,但是可以读.  
+- 在迭代期间删除或新增键值是安全的.   
+- 字典对象本身就是指针包装,传参时无须再次去地址.  
 ## 4.4 结构体
 
 ```go
@@ -197,6 +419,8 @@ type person struct{
 - 如果结构体的所有成员变量都是可比较的,那么这个结构体就是可比较的.
 
 
+  
+
 ### 4.4.3 结构体嵌套和匿名成员
 
 ```go
@@ -219,7 +443,10 @@ func main(){
 - 访问时可以直接通过.访问嵌套的子结构体变量,但是初始化时不能省略偷懒.
 - 因为拥有隐式的名字,所以不能在一个结构体中定义两个相同类型的匿名成员.  
 
-
+### 4.4.4 自定义类型
+- 即使指定基础类型,只表明它们有相同底层数据结构,两者间不存在任何关系,属完全不同的两种类型.
+- struct tag 也属于类型组成部分(有和没有是两种类型)
+- 函数的参数顺序页数签名组成部分
 ### 4.5 json
 - marshal 使用Go结构体成员的名称作为json对象里面字段的名称，只有可导出的成员可以转换为json字段。
 ```go
@@ -362,7 +589,18 @@ func main(){ // 匿名函数
 - 按值传递
 - 有些函数的声明没有函数体，说明这个函数使用了Go以外的语言实现。
 - 一个函数如果有命名的返回值，可以省略return语句的操作数，被称为裸返回。
+- 函数是第一类对象，具备相同签名（参数和返回值列表）的视作同一类型。
+- 第一类对象指可在运行期创建，可用作函数参数或返回值，可存入变量的实体。最常见的用法就是匿名函数。  
 
+
+- 使用明明类型更加方便
+```go
+type FormatFunc func(string, ...interface{}) (string,error)
+//如果不使用命名类型，参数签名会很长
+func format(f FormatFunc, s string, a...interface{})(string, error){
+	return f(s,a...)
+}
+```
 
 ## 5.4 错误处理
 ```go
@@ -396,7 +634,7 @@ func main(){
 - 函数变量本身不可比较
 - 函数变量是的函数不仅将数据进行参数化，还将函数的行为当作参数进行传递。
 
-
+- 不管是指针、引用类型，还是其他类型参数，都是值拷贝传递。区别无非是拷贝目标对象，还是拷贝指针。函数调用前，回味形参和返回值分配内存空间，并将实参拷贝到形参内存。
 
 ## 5.6 匿名函数
 指没有定义名字符号的函数  
@@ -488,6 +726,24 @@ func sum(vals ...int) int {
 - 延迟执行的函数在return语句之后执行，并且可以更新函数的结果变量。 
 - 最先defer的语句最后执行，最后defer的语句最先执行 
 - 延迟调用开销挺大
+- 延迟调用注册的是调用，必须提供执行所需参数。参数值在注册时被复制并被缓存起来。如果对状态敏感，可改用指针或闭包。
+```go
+func main(){
+	x,y := 1,2
+
+	defer func(a int){
+		println("defer x,y= ", a, y)
+	}(x)
+
+	x+= 100
+	y+= 200
+	println(x,y)
+}
+-------
+101 202
+defer x,y=1 202
+-------
+```
 ## 5.9 panic 宕机
 当宕机发生时，所有的延迟函数以倒序执行，从栈最上面的函数开始一直返回到main函数。 
 
@@ -495,6 +751,10 @@ func sum(vals ...int) int {
 - 不应该尝试恢复从另一个包内发生的宕机。 
 
 
+## 5.21 函数参数
+### 5.21.1 变参
+- 将切片作为变参时，必须进行展开操作，如果是数组，先将其转换为切片。 
+- 
 # Chapter6 方法
 ## 6.1 方法声明
 ```go
@@ -532,7 +792,7 @@ func main() {
 
 
 ## 6.3 通过结构体内嵌组成类型
-不太明白
+类似继承  
 
 ## 6.4 方法变量
 - 把方法变成一个变量，可以省略接收者 
@@ -694,6 +954,32 @@ func main() {
 # Chapter8 goroutine 和通道 channel
 ## 8.1 goroutine
 ```go
+package main 
+import(
+	"fmt"
+	"time"
+)
+
+func task(id int){
+	for i := 0; i < 5 ; i++{
+		fmt.Printf("%d: %d\n",id, i)
+		time.Sleep(time.Second)
+	}
+}
+
+func main(){
+	go task(1)
+	go task(2)
+
+	time.Sleep(time.Second*6)
+}
+// 1:0
+// 2:0
+// 1:1
+// 2:1
+// 1:2
+// 2:2
+---------------
 var wg sync.WaitGroup
 
 func hello() {
@@ -703,7 +989,7 @@ func hello() {
 
 func main() {
 	wg.Add(1)
-	go hello()
+	go hello()    
 	fmt.Println("hello main")
 	wg.Wait()
 
@@ -714,6 +1000,9 @@ func main() {
 ## 8.4 channel 
 - channel 是一种类型,一种引用类型
 - var someChannel chan type
+- channel 与 goroutine搭配,实现用通信代替内存共享的CSP模型.
+
+
 ```go
 var ch1 chan int 
 var ch2 chan bool
