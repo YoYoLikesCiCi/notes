@@ -363,7 +363,8 @@ for i:=0;i<7;i++ {
 - 键的类型k,必须是可以通过操作符==来进行比较的数据类型(点名slice)
 - 运行时会对字典并发操作做出检测,如果冲突会导致进程崩溃
 - 对字典进行迭代，每次返回的键值次序都不相同。  
-- 因为内存访问和哈希算法等缘故，字典被设计成“not addressable”， 不能直接修改value成员。  
+- 因为内存访问和哈希算法等缘故，字典被设计成“not addressable”， 不能直接修改value成员。  正确做法是返回整个value,等修改后再设定字典键值,或者直接用指针类型.
+- 
 ```go
 func main(){
 type user struct{
@@ -391,7 +392,8 @@ type user struct{
 
 - 不能对空字典进行写操作,但是可以读.  
 - 在迭代期间删除或新增键值是安全的.   
-- 字典对象本身就是指针包装,传参时无须再次去地址.  
+- 运行时会对字典并发操作做出检测.如果某个任务正在对字典进行写操作,那么其他任务就不能对该字典执行并发操作(读、写、删除),否则会导致进程崩溃.
+- 字典对象本身就是指针包装,传参时无须再次取地址.  
 ## 4.4 结构体
 
 ```go
@@ -413,16 +415,46 @@ type person struct{
 
 - 成员变量的顺序严格(成员变量顺序定义不同则为不同的结构体)
 - 成员变量首字母大写则可导出
+- 可以直接定义匿名结构类型变量,或者用作字段类型,但是因为缺少类型标识,作为字段类型时无法直接初始化. 
+```go
+func main(){
+   u := struct{
+       name string
+       age byte
+   }{
+       name : "Tom",
+       age : 12,
+   }
+    type file struct{
+        name string
+        attr struct{
+            owner int
+            perm int
+        }
+    }
+
+    f := file {
+        name :"test.dat",
+        //attr :{     //error: missing type in composite literal 
+        //.   owner : 1,
+        //.   perm: 0755,},
+        }
+    f.attr.owner = 1 //the right way 
+    f.attr.perm = 0755. 
+    fmt.Println(u,f)
+}
+```
 - 一个聚合类型不可以包含自己,但是可以定义一个指向自己的指针类型
 - 结构体的零值由结构体成员的零值组成. 
 - 按值调用,所以需要修改结构体内容的时候传参用指针
 - 如果结构体的所有成员变量都是可比较的,那么这个结构体就是可比较的.
+- 空结构(struct{})是没有字段的结构类型,无论是其自身,还是作为数组元素类型,其长度都是0. 可以作为通道元素类型,用于事件通知.  
 
 
   
 
 ### 4.4.3 结构体嵌套和匿名成员
-
+- 指没有名字,仅有类型的字段
 ```go
 type Person struct{
     string 
@@ -442,7 +474,7 @@ func main(){
 - 结构体中可以定义不带名称的结构体成员,但其类型必须是<mark>命名类型</mark> 或者指向命名类型的指针. 
 - 访问时可以直接通过.访问嵌套的子结构体变量,但是初始化时不能省略偷懒.
 - 因为拥有隐式的名字,所以不能在一个结构体中定义两个相同类型的匿名成员.  
-
+- 不能将基础类型和其指针类型同时嵌入,因为两者隐式名字相同.  
 ### 4.4.4 自定义类型
 - 即使指定基础类型,只表明它们有相同底层数据结构,两者间不存在任何关系,属完全不同的两种类型.
 - struct tag 也属于类型组成部分(有和没有是两种类型)
@@ -553,10 +585,31 @@ Actors":["Steve McQueen","Jacqueline Bisset"]}]
 
 
 
-### 4.6 文本和HTML模板
+## 4.6 文本和HTML模板
 - text/template , html/template
 - 模板是一个字符串或者文件，包含一个或者多个两边用双大括号包围的单元——{{...}},这称为操作。
 
+
+## 4.7 字段标签
+- 不是注释,是用来对字段进行描述的元数据,尽管不属于数据成员,确是类型的组成部分.
+- 可用反射获取标签信息,常被用作格式校验,数据库关系映射等.  
+```go
+type user struct{
+    name string `昵称`
+    sex byte `性别`
+}
+
+func main(){
+    u := user{"Tom",1}
+    v := reflect.ValueOf(u)
+    t := v.Type()
+    for i,n := 0, t.NumField(); i < n; i++{
+        fmt.Printf("%s: %v\n",t.Field(i).Tag, v.Field(i))}
+}
+--------output:
+昵称:Tom
+性别:1
+```
 
 # Chapter5 函数
 ## 5.1 函数声明
@@ -593,7 +646,7 @@ func main(){ // 匿名函数
 - 第一类对象指可在运行期创建，可用作函数参数或返回值，可存入变量的实体。最常见的用法就是匿名函数。  
 
 
-- 使用明明类型更加方便
+- 使用命名类型更加方便
 ```go
 type FormatFunc func(string, ...interface{}) (string,error)
 //如果不使用命名类型，参数签名会很长
@@ -786,6 +839,34 @@ func main() {
 - 每一个类型都有自己的命名空间
 - GO语言中方法可以绑定到任何类型上,内建类型需要重新命名. 
 
+- receiver的类型是指针还是基础类型关系到调用时对象实例是否被复制
+```go
+type N int
+
+func(n N)value(){
+    n++ 
+    fmt.Printf("v: %p, %v\n", &n,n)
+}
+
+func(n*N) pointer(){
+    (*n)++
+    fmt.Printf("p: %p, %v\n", n ,*n)
+    }
+
+func main(){
+    var a N = 25 
+    a.value()
+    a.pointer()
+
+    fmt.Printf("a: %p, %v\n", &a, a)
+}
+
+--------output:
+v:0xc8200741c8,26            //receiver被复制 
+p:0xc8200741c0,26
+a:0xc8200741c0,26
+
+```
 
 ## 6.2 指针接收者的方法
 - 实参形参尽量保证同类型的变量
@@ -807,14 +888,66 @@ func main() {
 - 要封装一个对象,必须使用结构体.  
 - Go语言中封装的单元是包而不是类型. 结构体类型内的字段对于同一个包中的所有代码都是可见的. 
 
+## 6.7 方法集
+类型有一个与之相关的方法集,决定了它是否实现某个接口.  
 
+> 类型T方法集包含所有receiver T方法。
+> 类型*T方法集包含所有receiver T+*T方法。
+>匿名嵌入S，T方法集包含所有receiver S方法。
+>匿名嵌入*S，T方法集包含所有receiver S+*S方法。
+>匿名嵌入S或*S，*T方法集包含所有receiver S+*S方法。”
+
+```go 
+type S struct{}
+type T struct{
+    S
+}
+
+func(S) sVal() {}
+func(*S) sPtr() {}
+func(T) tVal()  {}
+func(*T) tPtr()  {}
+
+func methodSet(a interface{}){  //显示方法集里所有方法名字
+    t:=reflect.TypeOf(a) 
+
+    for i,n:=0, t.NumMethod(); i<n; i++{
+        m:=t.Method(i)
+        fmt.Println(m.Name, m.Type)
+    }
+}
+
+func main(){
+    var t T
+    methodSet(t)
+    println("--------")
+    methodSet(&t)
+}
+----------output:
+sVal func(main.T) 
+tVal func(main.T) 
+---------------------- 
+sPtr func(*main.T) 
+sVal func(*main.T) 
+tPtr func(*main.T) 
+tVal func(*main.T)
+```
+
+方法集仅影响接口实现和方法表达式转换,与通过实例或实例指针调用方法无关.实例并不适用方法集,而是直接调用. 
+
+- 匿名字段是为方法集准备的.
+- “封装”、“继承”和“多态”, go仅实现了部分特征,更倾向于“组合优于继承”. 将模块分解成相互独立的更小单元,分别处理不同方面的需求,最后以匿名嵌入方式组合到一起,共同实现对外接口. 
+- 组合没有父子依赖,不会破坏封装. 整体和局部松耦合，可以任意增加来实现扩展。 
+
+
+## 6.8 表达式
 
 # Chapter7 接口
 - 接口是一种抽象类型(把它当作一种类型)
 - 更像是一种协议(swift protocol)
 - 只要一个类型实现了一个接口的所有方法,就说这个类型实现了某个接口
 - 使用值接收者实现接口:类型的值和类型的指针都能够保存到接口变量中
-- 所有类型都实现了接口, 空接口可以存储任何值,
+- 所有类型都实现了空接口, 空接口可以存储任何值,
  > 空接口作为函数的参数  
  > 空接口可以作为map的value
  ```go
@@ -825,7 +958,11 @@ func main() {
 
  ```
 
- 
+-  不能有字段
+- 不能定义自己的方法
+- 只能声明方法，不能实现。
+- 可嵌入其他接口类型。
+
 ```go
 // code of the book
 package main
@@ -872,6 +1009,58 @@ func (v *Vertex) Abs() float64 {
 }
 
 
+
+
+
+//code of go语言学习笔记
+type tester interface{ 
+   test() 
+   string()string
+} 
+  
+type data struct{} 
+  
+func(*data)test() {} 
+func(data)string()string{return"" } 
+  
+func main() { 
+   var d data
+  
+    //var t tester=d  // 错误:data does not implement tester
+             //    (test method has pointer receiver) 
+  
+   var t tester= &d
+   t.test() 
+   println(t.string()) 
+}
+// 编译器根据方法集来判断是否实现了接口，上面的例子中只有*data才符合tester的要求。
+
+```
+
+## 嵌入接口
+嵌入其他接口类型，相当于将其声明的方法集导入
+```go
+type stringer interface{
+    string() string
+}
+type tester interface{
+    stringer  //嵌入其他接口
+    test()
+}
+
+type data struct{}
+
+func(*data)test() {}
+func(data)string()string{
+    return ""
+}
+
+func main(){
+    var d data
+    var t tester = &d
+    t.test()
+    println(t.string())
+}
 ```
 ## 7.5 接口值
 - 一个接口类型的值分为两个部分: 一个具体类型 和 该类型的一个值. 称为接口的<mark>动态类型</mark> 和<mark>动态值</mark> . 
@@ -953,6 +1142,12 @@ func main() {
 
 # Chapter8 goroutine 和通道 channel
 ## 8.1 goroutine
+关键字go并非执行并发操作，而是创建一个并发任务单元。新建任务被放置在系统队列中，等待调度器安排合适系统线程去获取执行权。当前流程不会阻塞，不会等待该任务启动，且运行时也不保证并发任务的执行次序。
+
+  每个任务单元除保存函数指针、调用参数外，还会分配执行所需的栈内存空间。相比系统默认MB级别的线程栈，goroutine自定义栈初始仅须2 KB，所以才能创建成千上万的并发任务。自定义栈采取按需分配策略，在需要时进行扩容，最大能到GB规模。
+
+  在不同版本中，自定义栈大小略有不同。如未做说明，本书特指1.6 amd64。
+
 ```go
 package main 
 import(
@@ -997,7 +1192,66 @@ func main() {
 
 ```
 
+## wait
+进程退出时不会等待并发任务结束，可用channel阻塞，然后发出退出信号。
+```go
+func main(){
+    exit := make(chan struct{})  //创建通道，仅是通知，所以数据没有实际意义
+    go func(){
+        time.Sleep(time.Second)
+        println("goroutine done.")
+        close(exit)  //关闭通道，发出信号
+    }()
+    println("main...") -< exit  //如果通道关闭，立即解除阻塞
+    println("main exit.")
+}
+-----------output:
+main...
+goroutine done.
+main exit. 
+```
+
+如果要等待多个任务结束，可以使用sync.WaitGroup。通过设定计数器，让每个goroutine在退出前递减，直至归零时解除阻塞。 
+
+```go
+import(
+    "sync"
+    "time"
+)
+func main(){
+    var wg sync.WaitGroup
+    for i:=0;i<10;i++{
+        wg.Add(1)
+        go func(id int){
+            defer wg.Done()
+            time.Sleep(time.Second)
+            println("goroutine",id,"done.")
+        }(i)
+    }
+    println("main...")
+    wg.wait()  //阻塞，直到技术归零。
+    println("main exit.")
+}
+--------output:
+main...
+goroutine 9 done. 
+goroutine 4 done. 
+goroutine 2 done. 
+goroutine 6 done. 
+goroutine 8 done. 
+goroutine 3 done. 
+goroutine 5 done. 
+goroutine 1 done. 
+goroutine 0 done. 
+goroutine 7 done. 
+main exit.
+```
+
+## GOMAXPROCS
+运行时可能会创建很多线程，但任何时候仅有限的几个线程参与并发任务执行。该数量默认与处理器核数相等，可用runtime.GO-MAXPROCS函数（或环境变量）修改。
+
 ## 8.4 channel 
+
 - channel 是一种类型,一种引用类型
 - var someChannel chan type
 - channel 与 goroutine搭配,实现用通信代替内存共享的CSP模型.

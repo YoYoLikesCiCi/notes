@@ -4,13 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "9611f469abcc33b7",
+        "id": "43e93d3541030763",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Future/2022 影单.md",
-            "mode": "source",
+            "file": "Computer/GoPL.md",
+            "mode": "preview",
             "source": false
           }
         }
@@ -19,114 +19,99 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "6475605ec290a8d4",
-    "type": "split",
+    "id": "856aa269d0d0c864",
+    "type": "mobile-drawer",
     "children": [
       {
-        "id": "2cd4f27bc2d663c4",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "f93b1f63a56ed981",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {}
-            }
-          },
-          {
-            "id": "738d2a30018abaf2",
-            "type": "leaf",
-            "state": {
-              "type": "search",
-              "state": {
-                "query": "",
-                "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical"
-              }
-            }
-          },
-          {
-            "id": "27a514612e07ab07",
-            "type": "leaf",
-            "state": {
-              "type": "starred",
-              "state": {}
-            }
+        "id": "b568e744cbed1dfd",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {}
+        }
+      },
+      {
+        "id": "558c00da7980d42a",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
           }
-        ]
+        }
+      },
+      {
+        "id": "a9b5b15f10d107d0",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true
+          }
+        }
+      },
+      {
+        "id": "f87a451dc388ee96",
+        "type": "leaf",
+        "state": {
+          "type": "starred",
+          "state": {}
+        }
       }
     ],
-    "direction": "horizontal",
-    "width": 300
+    "currentTab": 0
   },
   "right": {
-    "id": "8e929bf33f2dc3d0",
-    "type": "split",
+    "id": "63ad9e1a83b728be",
+    "type": "mobile-drawer",
     "children": [
       {
-        "id": "b90291d51138aa06",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "5966bc88334e8830",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "Future/2022 影单.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              }
-            }
-          },
-          {
-            "id": "e2de9c95a6d5f693",
-            "type": "leaf",
-            "state": {
-              "type": "tag",
-              "state": {
-                "sortOrder": "frequency",
-                "useHierarchy": true
-              }
-            }
-          },
-          {
-            "id": "f58c45f5763bd025",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "Future/2022 影单.md"
-              }
-            }
+        "id": "3fb7dfa579f65037",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "Computer/GoPL.md",
+            "collapseAll": true,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": true,
+            "unlinkedCollapsed": true
           }
-        ]
+        }
+      },
+      {
+        "id": "ad0fecdc65058de5",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "Computer/GoPL.md"
+          }
+        }
       }
     ],
-    "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "currentTab": 0
   },
-  "active": "9611f469abcc33b7",
+  "active": "43e93d3541030763",
   "lastOpenFiles": [
-    "Future/2022 影单.md",
-    "Future/在追剧.md",
-    "Swift_CS193p.md",
-    "关于BountyHunter.md",
-    "PTLevel.md",
-    "自动切换 vim 中文输入法 086b229d29334323925df79ccdff95e8.md",
-    "Future/随想摘录.md",
     "Computer/GoPL.md",
-    "Computer/CSAPP.md",
-    "Computer/cn.md"
+    "Computer/SwiftUI/项目重构笔记.md",
+    "Postgraduate/DataStruct.md",
+    "Future/在追剧.md",
+    "notes/信息安全数学.md",
+    "Postgraduate/ComputerNetwork.md",
+    "流程图.md",
+    "networkSecurity.md",
+    "Future/2022 影单.md",
+    "Swift_CS193p.md"
   ]
 }
