@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "43e93d3541030763",
+        "id": "3ef4e55161d34a42",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Computer/GoPL.md",
+            "file": "Computer/DatabaseSystemConcepts.md",
             "mode": "preview",
             "source": false
           }
@@ -77,11 +77,11 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Computer/GoPL.md",
+            "file": "Computer/DatabaseSystemConcepts.md",
             "collapseAll": true,
-            "extraContext": false,
+            "extraContext": true,
             "sortOrder": "alphabetical",
-            "showSearch": false,
+            "showSearch": true,
             "searchQuery": "",
             "backlinkCollapsed": true,
             "unlinkedCollapsed": true
@@ -94,24 +94,24 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "Computer/GoPL.md"
+            "file": "Computer/DatabaseSystemConcepts.md"
           }
         }
       }
     ],
-    "currentTab": 0
+    "currentTab": 1
   },
-  "active": "43e93d3541030763",
+  "active": "ad0fecdc65058de5",
   "lastOpenFiles": [
+    "Computer/DatabaseSystemConcepts.md",
     "Computer/GoPL.md",
-    "Computer/SwiftUI/项目重构笔记.md",
     "Postgraduate/DataStruct.md",
+    "Postgraduate/ComputerNetwork.md",
+    "Computer/SwiftUI/项目重构笔记.md",
     "Future/在追剧.md",
     "notes/信息安全数学.md",
-    "Postgraduate/ComputerNetwork.md",
     "流程图.md",
     "networkSecurity.md",
-    "Future/2022 影单.md",
-    "Swift_CS193p.md"
+    "Future/2022 影单.md"
   ]
 }

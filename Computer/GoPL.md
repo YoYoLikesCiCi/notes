@@ -196,7 +196,7 @@ func main() {
 
 ```
 
-# Chapter4 符合数据类型
+# Chapter4 复合数据类型
 ## 4.1 数组
 
 ```go
@@ -218,7 +218,7 @@ for _, value := range cityArray{
 - go数组是值类型,不同于C,赋值和传参都会复制整个数组数据.
 - 下标包头不包尾
 - 内置函数len和cap都返回第一维长度  
-- 如果元素类型支持“==、！=”操作符，那么数组也支持此操作
+- 如果元素类型支持“== 、！=”操作符，那么数组也支持此操作  
 - Go中函数参数中的数组使用值传递.赋值和传参操作都会复制整个数组数据。  
 
 - 对于结构等复合类型，可以省略元素初始化类型标签
@@ -240,7 +240,7 @@ func main(){
 
 ## 4.2 slice
 表示一个拥有相同类型元素的可变长度的序列.   
-切片本身不是动态数组或数组指针。内部通过指针饮用底层数组，设定相关属性将数据读写操作限定在指定区域内。  
+切片本身不是动态数组或数组指针。内部通过指针引用底层数组，设定相关属性将数据读写操作限定在指定区域内。  
 ```go
 type slice struct{
     array unsafe.Pointer  
@@ -342,7 +342,7 @@ for i:=0;i<7;i++ {
 - 数据被追加到超过原底层数组，如果超过cap限制，则为新切片对象重新分配数组。  
   - 超出cap限制，而不是底层数组长度
   - 新分配数组长度是原来cap两倍，不是原来数组两倍
-  - 并非总是2被，对于较大的切片，会尝试扩容1/4，以节约内存。  
+  - 并非总是2倍，对于较大的切片，会尝试扩容1/4，以节约内存。  
 
 
 ## 4.3 map
@@ -360,10 +360,10 @@ for i:=0;i<7;i++ {
 ```
 
 
-- 键的类型k,必须是可以通过操作符==来进行比较的数据类型(点名slice)
+- 键的类型k,必须是可以通过操作符== 来进行比较的数据类型(点名slice)
 - 运行时会对字典并发操作做出检测,如果冲突会导致进程崩溃
 - 对字典进行迭代，每次返回的键值次序都不相同。  
-- 因为内存访问和哈希算法等缘故，字典被设计成“not addressable”， 不能直接修改value成员。  正确做法是返回整个value,等修改后再设定字典键值,或者直接用指针类型.
+- 因为内存访问和哈希算法等缘故，字典被设计成“not addressable”， ==不能直接修改value成员== 。  正确做法是返回整个value,等修改后再设定字典键值,或者直接用指针类型.
 - 
 ```go
 func main(){
@@ -478,7 +478,7 @@ func main(){
 ### 4.4.4 自定义类型
 - 即使指定基础类型,只表明它们有相同底层数据结构,两者间不存在任何关系,属完全不同的两种类型.
 - struct tag 也属于类型组成部分(有和没有是两种类型)
-- 函数的参数顺序页数签名组成部分
+- 函数的参数顺序也是签名组成部分
 ### 4.5 json
 - marshal 使用Go结构体成员的名称作为json对象里面字段的名称，只有可导出的成员可以转换为json字段。
 ```go
@@ -591,7 +591,7 @@ Actors":["Steve McQueen","Jacqueline Bisset"]}]
 
 
 ## 4.7 字段标签
-- 不是注释,是用来对字段进行描述的元数据,尽管不属于数据成员,确是类型的组成部分.
+- 不是注释,是用来对字段进行描述的元数据,尽管不属于数据成员,却是类型的组成部分.
 - 可用反射获取标签信息,常被用作格式校验,数据库关系映射等.  
 ```go
 type user struct{
@@ -711,7 +711,7 @@ func a() func() {
 }
 
 func makeSuffixFunc(suffix string) func(string) string{
-    return func(name string string{	
+    return func(name string) string{	
         if !strings.HasSuffix(name, suffix) {
    			return name + suffix
 		}
@@ -744,7 +744,7 @@ func main(){
 
 
 
-- 函数字面量就行函数声明，但在func关键字后面没有函数的名称。
+- 函数字面量就像函数声明，但在func关键字后面没有函数的名称。
 - 用这种方式定义的函数能够获取到整个词法环境，因此里层的函数能够使用外层函数中的变量。 
 
 
@@ -892,10 +892,10 @@ a:0xc8200741c0,26
 类型有一个与之相关的方法集,决定了它是否实现某个接口.  
 
 > 类型T方法集包含所有receiver T方法。
-> 类型*T方法集包含所有receiver T+*T方法。
+> 类型*T方法集包含所有receiver T+\*T方法。
 >匿名嵌入S，T方法集包含所有receiver S方法。
->匿名嵌入*S，T方法集包含所有receiver S+*S方法。
->匿名嵌入S或*S，*T方法集包含所有receiver S+*S方法。”
+>匿名嵌入*S，T方法集包含所有receiver S+\*S方法。
+>匿名嵌入S或*S，*T方法集包含所有receiver S+\*S方法。”
 
 ```go 
 type S struct{}
@@ -1168,12 +1168,16 @@ func main(){
 
 	time.Sleep(time.Second*6)
 }
-// 1:0
-// 2:0
-// 1:1
-// 2:1
-// 1:2
-// 2:2
+//1: 0  
+//2: 0  
+//1: 1  
+//2: 1  
+//1: 2  
+//2: 2  
+//1: 3  
+//2: 3  
+//1: 4  
+//2: 4
 ---------------
 var wg sync.WaitGroup
 
@@ -1190,6 +1194,10 @@ func main() {
 
 }
 
+//hello main
+//hello someone
+
+
 ```
 
 ## wait
@@ -1202,7 +1210,8 @@ func main(){
         println("goroutine done.")
         close(exit)  //关闭通道，发出信号
     }()
-    println("main...") -< exit  //如果通道关闭，立即解除阻塞
+    println("main...") 
+    <- exit  //如果通道关闭，立即解除阻塞
     println("main exit.")
 }
 -----------output:
@@ -1229,7 +1238,7 @@ func main(){
         }(i)
     }
     println("main...")
-    wg.wait()  //阻塞，直到技术归零。
+    wg.Wait()  //阻塞，直到计数归零。
     println("main exit.")
 }
 --------output:
@@ -1254,7 +1263,7 @@ main exit.
 
 - channel 是一种类型,一种引用类型
 - var someChannel chan type
-- channel 与 goroutine搭配,实现用通信代替内存共享的CSP模型.
+- channel 与 goroutine搭配,实现用==通信代替内存共享的CSP模型.==
 
 
 ```go
@@ -1269,81 +1278,102 @@ ch4 := make(chan int)
 支持3种操作
 1. 发送 send   
 ch <- 10  
-// >
 2. 接收 receive  
 x := <- ch  
-// >
 3. 关闭 close     
 close(ch)    
 
-
+- 关闭后的发送操作将导致宕机.
+- 在一个已经关闭的通道上进行接收操作,将获取所有已经发送的值,直到通道为空;这时任何接收操作会立即完成,同时获取到一个通道元素类型对应的零值.
 ### 8.4.1 无缓冲通道
+- 无缓冲通道上的发送操作将会阻塞,直到另一个goroutine在对应的通道上执行接收操作,这时值传送完成,两个goroutine都可以继续执行.
 ```go
-func f1(ch chan<- int){
-// chan<-  限制只能向通道发送内容
-for i := 0; i < 100; i++{
-    ch <- i 
-}
-close(ch)
-}
-
-func f2(ch1 <-chan int, ch2 chan<- int){
-// 限制只能从ch1里面取, 向ch2里发送
-    temp := <- ch1
-	// way1 of fetch value from channel 
-	for{
-	tem, ok := <- ch1
-	if !ok{
-	break
-	}
-	ch2 <- temp*temp 
-	}
-	close(ch2) 
-}
-
-func main(){
-    ch1 := make(chan int, 100)
-	ch2 := make(chan int, 200)
-
-	go f1(ch1)
-	go f2(ch2)
-
-	// wat2 of fetch value from channel 
-	for ret := range ch2{
-	fmt.Println(ret)
-	}
+func f1(ch chan<- int) {  
+   // chan<-  限制只能向通道发送内容  
+   for i := 0; i < 100; i++ {  
+      ch <- i  
+   }  
+   close(ch)  
+}  
+  
+func f2(ch1 <-chan int, ch2 chan<- int) {  
+   // 限制只能从ch1里面取, 向ch2里发送  
+   // tem := <- ch1  这是阻塞式接收数据
+   // way1 of fetch value from channel  
+   for {  
+      tem, ok := <-ch1  //这样是非阻塞式接收数据,占用高CPU,使用较少
+      if !ok {  
+         break  
+      }  
+      ch2 <- tem  
+   }  
+   close(ch2)  
+}  
+  
+func main() {  
+   ch1 := make(chan int, 100)  
+   ch2 := make(chan int, 200)  
+  
+   go f1(ch1)  
+   go f2(ch1, ch2)  
+  
+   // wat2 of fetch value from channel  
+   for ret := range ch2 {  
+      fmt.Println(ret)  
+   }  
 }
 
 ```
 
-## workpool模式
+## workpool模式 (线程池)
 
 ```go 
-func worker(id int, jobs<-chan int, results chan<- int){
-for job := range jobs {
-    fmt.Printf("worker:%d start jbo:%d\n", id, job)
-	results <- job*2 
-	time.Sleep(time.Millisencond*500)
-	fmt.Printf("worrker:%d stop jbo:%d \n", id, job )
+package main  
+  
+import (  
+   "fmt"  
+   "time")  
+  
+func worker(id int, jobs <-chan int, results chan<- int) {  
+   for job := range jobs {  
+      fmt.Printf("worker:%d start job:%d\n", id, job)  
+      results <- job * 2  
+      time.Sleep(time.Millisecond * 500)  
+      fmt.Printf("worker:%d stop job:%d \n", id, job)  
+   }  
+}  
+func main() {  
+   jobs := make(chan int, 100)  
+   results := make(chan int, 100)  
+  
+   for j := 0; j < 3; j++ {  
+      go worker(j, jobs, results)  
+   }  
+  
+   for i := 0; i < 5; i++ {  
+      jobs <- i  
+   }  
+   close(jobs)  
+  
+   for i := 0; i < 5; i++ {  
+      ret := <-results  
+      fmt.Println(ret)  
+   }  
 }
-}
-func main(){
-    jbos := make(chan int , 100)
-	results := make(chan int, 100)
-    
-	for j := 0; j < 3; j++{
-	go worker(j, jobs, results)
-	}
 
-	for i := 0; i < 5; i++{
-	jobs <- i 
-	}
-	close(jobs)
-
-	for i := 0; i < 3; i++{
-	ret := <- results
-	fmt.Println(ret)
-	}
+--------
+//worker:2 start job:0  
+//worker:0 start job:1  
+//0  
+//worker:1 start job:2  
+//2  
+//4  
+//worker:1 stop job:2  
+//worker:1 start job:3  
+//6  
+//worker:0 stop job:1  
+//worker:0 start job:4  
+//8
 ```
 
 ## 8.7 select 多路复用
