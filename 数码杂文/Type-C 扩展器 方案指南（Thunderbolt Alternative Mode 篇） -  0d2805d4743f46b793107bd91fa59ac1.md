@@ -2,7 +2,7 @@
 
 [https://zhuanlan.zhihu.com/p/390425571](https://zhuanlan.zhihu.com/p/390425571)
 
-![Type-C%20%E6%89%A9%E5%B1%95%E5%99%A8%20%E6%96%B9%E6%A1%88%E6%8C%87%E5%8D%97%EF%BC%88Thunderbolt%20Alternative%20Mode%20%E7%AF%87%EF%BC%89%20-%20%200d2805d4743f46b793107bd91fa59ac1/v2-05ffda4a09e846111fa12c67d00f3e9a_1440w.jpg](Type-C%20%E6%89%A9%E5%B1%95%E5%99%A8%20%E6%96%B9%E6%A1%88%E6%8C%87%E5%8D%97%EF%BC%88Thunderbolt%20Alternative%20Mode%20%E7%AF%87%EF%BC%89%20-%20%200d2805d4743f46b793107bd91fa59ac1/v2-05ffda4a09e846111fa12c67d00f3e9a_1440w.jpg)
+![](img/v2-05ffda4a09e846111fa12c67d00f3e9a_1440w.jpg)
 
 ## Introduction
 

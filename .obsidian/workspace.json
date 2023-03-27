@@ -4,12 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "cbb4460fbf57724b",
-        "type": "leaf",
-        "state": {
-          "type": "empty",
-          "state": {}
-        }
+        "id": "d3feddc32e089d93",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7ce1711d689e7418",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Future/2023-03学习.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -27,7 +37,9 @@
             "type": "leaf",
             "state": {
               "type": "file-explorer",
-              "state": {}
+              "state": {
+                "sortOrder": "byModifiedTime"
+              }
             }
           },
           {
@@ -73,7 +85,8 @@
             "state": {
               "type": "backlink",
               "state": {
-                "collapseAll": false,
+                "file": "Future/2023-03学习.md",
+                "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
@@ -99,27 +112,49 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Future/2023-03学习.md"
+              }
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
-  "active": "cbb4460fbf57724b",
+  "left-ribbon": {
+    "hiddenItems": {
+      "canvas:新建白板": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "command-palette:打开命令面板": false,
+      "markdown-importer:打开 Markdown 格式转换器": false
+    }
+  },
+  "active": "7ce1711d689e7418",
   "lastOpenFiles": [
+    "Computer/ComputerNetwrok.md",
+    "Future/2023-03学习.md",
+    "Future/未命名.md",
+    "Postgraduate/ComputerNetwork.md",
+    "memory/崽崽.md",
+    "memory/书影音/2021 影单.md",
+    "memory/书影音/已读书单.md",
+    "memory/书影音/2021 书单.md",
+    "数码杂文/Type-C 扩展器 方案指南（Thunderbolt Alternative Mode 篇） -  0d2805d4743f46b793107bd91fa59ac1.md",
+    "烹羊宰牛/调味料标准/酱油.md",
+    "烹羊宰牛/调味料标准/蚝油.md",
+    "烹羊宰牛/调味料标准/料酒.md",
+    "烹羊宰牛/菜谱/红烧鱼.md",
+    "Future/2023 影单.md",
+    "Future/2022 影单.md",
+    "自动切换 vim 中文输入法 086b229d29334323925df79ccdff95e8/Xnip2021-07-03_23-39-05-5330072.jpg",
     "SY-work/Week3/Cloud Sync.md",
     "SY-work/Week3/Drive、Office.md",
     "SY-work/Week3/Drive ShareSYnc.md",
     "SY-work/Week3/Snapshot Replication.md",
     "SY-work/Week3/ABB.md",
-    "SY-work/Week3/1. Drive Server.md",
-    "SY-work/Week3/2. Drive Client.md",
-    "数码杂文/Type-C 扩展器 方案指南（Thunderbolt Alternative Mode 篇） -  0d2805d4743f46b793107bd91fa59ac1.md",
-    "Computer/GoPL.md",
-    "Computer/DatabaseSystemConcepts.md"
+    "SY-work/Week3/1. Drive Server.md"
   ]
 }

@@ -1,0 +1,124 @@
+{
+  "main": {
+    "id": "77aad793a58240be",
+    "type": "split",
+    "children": [
+      {
+        "id": "24db442324d048e1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bebaff97deafc977",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "读书笔记/营养圣经.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "856aa269d0d0c864",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "b568e744cbed1dfd",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "byModifiedTime"
+          }
+        }
+      },
+      {
+        "id": "558c00da7980d42a",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          }
+        }
+      },
+      {
+        "id": "a9b5b15f10d107d0",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true
+          }
+        }
+      },
+      {
+        "id": "f87a451dc388ee96",
+        "type": "leaf",
+        "state": {
+          "type": "starred",
+          "state": {}
+        }
+      }
+    ]
+  },
+  "right": {
+    "id": "63ad9e1a83b728be",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "3fb7dfa579f65037",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "读书笔记/营养圣经.md",
+            "collapseAll": true,
+            "extraContext": true,
+            "sortOrder": "alphabetical",
+            "showSearch": true,
+            "searchQuery": "",
+            "backlinkCollapsed": true,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "ad0fecdc65058de5",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "读书笔记/营养圣经.md"
+          }
+        }
+      }
+    ],
+    "currentTab": 1
+  },
+  "active": "bebaff97deafc977",
+  "lastOpenFiles": [
+    "读书笔记/营养圣经.md",
+    "Computer/ComputerNetwrok.md",
+    "Computer/DatabaseSystemConcepts.md",
+    "Computer/GoPL.md",
+    "Postgraduate/DataStruct.md",
+    "Postgraduate/ComputerNetwork.md",
+    "Computer/SwiftUI/项目重构笔记.md",
+    "Future/在追剧.md",
+    "notes/信息安全数学.md",
+    "流程图.md"
+  ]
+}
